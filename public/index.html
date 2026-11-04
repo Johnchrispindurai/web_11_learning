@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8e9">
+  <meta name="description" content="Little Sprouts student learning dashboard — Experiment 11 MongoDB CRUD.">
+  <title>Little Sprouts | Student Garden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-icon">🌱</span><span>little<span class="orange">sprouts</span><small>LEARN • PLAY • GROW</small></span></a>
+  <nav><a href="#welcome">Home</a><a href="#garden">Student Garden</a><a href="#about">About</a><span class="nav-pill">Experiment 11</span></nav>
+</header>
+
+<main>
+  <section class="hero" id="welcome">
+    <div class="hero-copy">
+      <div class="eyebrow"><i></i> YOUR LITTLE LEARNING COMMUNITY</div>
+      <h1>Every learner<br>helps our garden <span>grow.</span></h1>
+      <p>Welcome to the Student Garden! Add learners, explore their details and keep every little learning journey blooming.</p>
+      <div class="hero-actions"><a class="button primary" href="#garden">Explore student garden <b>→</b></a><span class="tiny-note">🌼 One record at a time</span></div>
+      <div class="hero-trust"><span>📚</span><div><b>Learning together is better</b><small>A cheerful space to manage student records</small></div></div>
+    </div>
+    <div class="hero-art"><div class="sun"></div><div class="garden-card"><div class="garden-emoji">🌻</div><strong>Watch little minds<br><em>blossom!</em></strong><small>✦ &nbsp; ✧ &nbsp; ✦</small></div><span class="float f1">🦋</span><span class="float f2">⭐</span><span class="float f3">🌈</span><span class="float f4">🍃</span></div>
+  </section>
+
+  <section class="stats">
+    <div><strong id="totalCount">—</strong><span>Little learners</span></div>
+    <div><strong id="cseCount">—</strong><span>CSE learners</span></div>
+    <div><strong id="departmentCount">—</strong><span>Departments</span></div>
+    <div class="stats-note">🌱 Growing together, every day</div>
+  </section>
+
+  <section class="dashboard" id="garden">
+    <div class="section-heading">
+      <div><div class="eyebrow">THE STUDENT GARDEN</div><h2>Plant a new <span>learning seed.</span></h2><p>Add a student or nurture an existing record.</p></div>
+      <div class="db-status" id="dbStatus"><i></i> Connecting to garden database…</div>
+    </div>
+
+    <div class="workspace">
+      <section class="form-card">
+        <div class="form-title"><span class="form-icon">✏️</span><div><h3 id="formTitle">Add a learner</h3><p>Fill in the details below.</p></div></div>
+        <form id="studentForm">
+          <label for="studentName">Student name</label>
+          <input id="studentName" name="name" placeholder="e.g. Arun Kumar" maxlength="70" required>
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
+            <option value="">Choose department</option><option value="CSE">CSE</option><option value="IT">IT</option><option value="ECE">ECE</option><option value="EEE">EEE</option><option value="MECH">MECH</option><option value="CIVIL">CIVIL</option><option value="AIDS">AI & DS</option><option value="OTHER">Other</option>
+          </select>
+          <label for="year">Academic year</label>
+          <select id="year" name="year" required><option value="">Choose year</option><option value="1">1st Year</option><option value="2">2nd Year</option><option value="3">3rd Year</option><option value="4">4th Year</option></select>
+          <button class="button primary full" id="submitButton" type="submit">Add student <b>＋</b></button>
+          <button class="cancel-button hidden" id="cancelEdit" type="button">Cancel editing</button>
+          <p class="form-hint">🔒 Records are saved in your connected MongoDB database.</p>
+        </form>
+      </section>
+
+      <section class="records-card">
+        <div class="records-head"><div><h3>Growing learners <span>🌿</span></h3><p>Your saved student records</p></div><button id="refreshButton" class="refresh-button" type="button" title="Refresh records">↻ Refresh</button></div>
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Search by name or department…" aria-label="Search students"></div>
+        <div class="table-wrap"><table><thead><tr><th>LEARNER</th><th>DEPARTMENT</th><th>YEAR</th><th>ACTIONS</th></tr></thead><tbody id="studentRows"><tr><td colspan="4" class="empty">🌱 Loading the student garden…</td></tr></tbody></table></div>
+        <div class="records-foot"><span id="recordCount">Loading records…</span><span>Powered by MongoDB 🍃</span></div>
+      </section>
+    </div>
+  </section>
+
+  <section class="crud-strip" id="about">
+    <div class="eyebrow">WHAT HAPPENS IN OUR GARDEN?</div><h2>Four little actions. <span>One growing database.</span></h2>
+    <div class="crud-grid">
+      <article><b class="crud-icon create">＋</b><h3>Create</h3><p>Add a student using MongoDB <code>insertOne()</code>.</p></article>
+      <article><b class="crud-icon read">⌕</b><h3>Read</h3><p>Display saved learners using <code>find()</code>.</p></article>
+      <article><b class="crud-icon update">✎</b><h3>Update</h3><p>Edit a learner using <code>updateOne()</code>.</p></article>
+      <article><b class="crud-icon delete">×</b><h3>Delete</h3><p>Remove a record using <code>deleteOne()</code>.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer><a class="brand" href="#"><span class="brand-icon">🌱</span><span>little<span class="orange">sprouts</span><small>LEARN • PLAY • GROW</small></span></a><p>Big discoveries start with little steps. 💛</p><small>Node.js + MongoDB · Experiment 11</small></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
